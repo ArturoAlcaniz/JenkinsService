@@ -1,5 +1,6 @@
 FROM arturoalcaniz/node-image:latest
-COPY JenkinsService /app/JenkinsService
+RUN --mount=type=secret,id=env \
+    git clone "https://$(grep TOKEN_GIT /run/secrets/env | cut -d'=' -f 2-)@github.com/ArturoAlcaniz/JenkinsService.git" /app/JenkinsService/
 RUN curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 
