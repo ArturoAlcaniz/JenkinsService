@@ -1,7 +1,7 @@
 FROM arturoalcaniz/node-image:latest
 RUN --mount=type=secret,id=env \
     git clone "https://$(grep TOKEN_GIT /run/secrets/env | cut -d'=' -f 2-)@github.com/ArturoAlcaniz/JenkinsService.git" /app/JenkinsService/
-RUN curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | tee \
+RUN curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 
 RUN echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
